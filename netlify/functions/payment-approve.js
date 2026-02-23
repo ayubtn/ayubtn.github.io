@@ -1,7 +1,7 @@
 const https = require("https");
 
-const PI_SERVER_API_KEY = process.env.PI_SERVER_API_KEY  "";
-const PI_API_BASE = process.env.PI_API_BASE  "https://api.minepi.com/v2";
+const PI_SERVER_API_KEY = process.env.PI_SERVER_API_KEY || "";
+const PI_API_BASE = process.env.PI_API_BASE || "https://api.minepi.com/v2";
 
 function jsonResponse(statusCode, body) {
   return {
@@ -29,7 +29,7 @@ function piRequest(method, apiPath, bodyObj) {
     hostname: url.hostname,
     path: url.pathname + url.search,
     headers: {
-      Authorization: Key ${PI_SERVER_API_KEY},
+      Authorization: `Key ${PI_SERVER_API_KEY}`,
       Accept: "application/json",
       "Content-Type": "application/json",
       "Content-Length": Buffer.byteLength(body)
@@ -84,7 +84,7 @@ exports.handler = async (event) => {
 
     const result = await piRequest(
       "POST",
-      /payments/${encodeURIComponent(paymentId)}/approve,
+      `/payments/${encodeURIComponent(paymentId)}/approve`,
       null
     );
 
