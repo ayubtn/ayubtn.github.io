@@ -22,57 +22,138 @@
         background: #0b1020;
         color: #fff;
         font-family: 'Cairo', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      header {
+        width: 100%;
+        background: rgba(11, 16, 32, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 12px 25px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        z-index: 100;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .user-avatar {
+        width: 35px;
+        height: 35px;
+        background: #4f86ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #0b1020;
+        font-size: 14px;
+      }
+      .user-text {
+        display: flex;
+        flex-direction: column;
+      }
+      .username {
+        font-size: 16px;
+        font-weight: 700;
+        color: #facc15;
+        line-height: 1.2;
+      }
+      .status {
+        font-size: 10px;
+        opacity: 0.5;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .pay-btn {
+        background: linear-gradient(135deg, #4f86ff 0%, #3b82f6 100%);
+        color: #fff;
+        border: none;
+        padding: 10px 24px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .pay-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      }
+      .pay-btn:active {
+        transform: translateY(0);
+      }
+      .main-content {
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
-        overflow: hidden;
-      }
-      .container {
+        padding: 100px 20px 40px;
         text-align: center;
-        background: rgba(255, 255, 255, 0.05);
-        padding: 40px;
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        width: 90%;
-        max-width: 400px;
       }
-      .username {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 30px;
-        color: #facc15;
+      .hero-title {
+        font-size: clamp(32px, 8vw, 64px);
+        font-weight: 900;
+        margin: 0;
+        background: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0.5) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
       }
-      .pay-btn {
-        background: #4f86ff;
-        color: #06102a;
-        border: none;
-        padding: 15px 40px;
-        font-size: 20px;
-        font-weight: 800;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: transform 0.2s, background 0.2s;
-        box-shadow: 0 10px 20px rgba(79, 134, 255, 0.3);
+      .hero-subtitle {
+        font-size: clamp(16px, 4vw, 20px);
+        opacity: 0.6;
+        margin-top: 15px;
+        max-width: 600px;
+        line-height: 1.6;
       }
-      .pay-btn:active {
-        transform: scale(0.95);
+      .support-card {
+        margin-top: 50px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 30px;
+        border-radius: 30px;
+        backdrop-filter: blur(5px);
       }
-      .status {
-        margin-top: 20px;
-        font-size: 14px;
-        opacity: 0.8;
+      .pi-icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+        display: block;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div id="usernameDisplay" class="username">Loading...</div>
-      <button id="payBtn" class="pay-btn">Pay 1 Pi</button>
-      <div id="statusDisplay" class="status">Waiting for authentication...</div>
-    </div>
+    <header>
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div class="user-text">
+          <div id="usernameDisplay" class="username">Guest</div>
+          <div id="statusDisplay" class="status">Connecting...</div>
+        </div>
+      </div>
+      <button id="payBtn" class="pay-btn">
+        <span>Support 1 Pi</span>
+      </button>
+    </header>
+    
+    <main class="main-content">
+      <!-- Empty main content as requested -->
+    </main>
 
     <script>
       (function() {
@@ -103,6 +184,7 @@
             });
             
             const username = auth.user.username;
+            document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
             userEl.textContent = username;
             statusEl.textContent = "Ready";
 
@@ -148,4 +230,5 @@
       })();
     </script>
   </body>
-</html>
+  </html>
+  
