@@ -1,0 +1,20 @@
+[[CURRENCIES]]
+code="TestToken1"
+issuer="G_ISSUER_PUBLIC_KEY"
+name="Your Name"
+desc="Token 1 on Pi Testnet"
+image="https://yourdomain.com/token1.png"
+
+[[CURRENCIES]]
+code="TestToken2"
+issuer="G_ISSUER_PUBLIC_KEY"
+name="Your Name"
+desc="Token 2 on Pi Testnet"
+image="https://yourdomain.com/token2.png"
+
+[[CURRENCIES]]
+code="TestToken3"
+issuer="G_ISSUER_PUBLIC_KEY"
+name="Your Name"
+desc="Token 3 on Pi Testnet"
+image="https://yourdomain.com/token3.png"
