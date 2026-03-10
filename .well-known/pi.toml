@@ -1,0 +1,20 @@
+[[CURRENCIES]]
+code="PGOLD"
+issuer="GAUIZK25ARVPCWCT3R44HEU23TSFKMFTF4WNSXMQWKKX4LOJFRWEBOSV"
+name="MeltiGold Rewards"
+desc="The premium reward token for our community. Stake and earn MeltiGold for exclusive benefits."
+image="https://yourdomain.com/gold.png"
+
+[[CURRENCIES]]
+code="PEARN"
+issuer="GAUIZK25ARVPCWCT3R44HEU23TSFKMFTF4WNSXMQWKKX4LOJFRWEBOSV"
+name="MeltiEarn Ecosystem"
+desc="Earn PEARN by participating in community activities and supporting our ecosystem growth."
+image="https://yourdomain.com/earn.png"
+
+[[CURRENCIES]]
+code="PCASH"
+issuer="GAUIZK25ARVPCWCT3R44HEU23TSFKMFTF4WNSXMQWKKX4LOJFRWEBOSV"
+name="MeltiCash Utility"
+desc="Your daily utility token on the network. Fast, secure, and easy to use for all peer-to-peer transactions."
+image="https://yourdomain.com/cash.png"
