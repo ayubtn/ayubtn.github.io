@@ -3,111 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melti Tokens - Pi Testnet Ecosystem</title>
+    <title>Melti Tokens - Web3 Ecosystem on Pi Testnet</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .token-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-purple: #8B5CF6;
+            --accent-blue: #3B82F6;
+            --accent-gold: #F59E0B;
+            --accent-green: #10B981;
         }
-        .token-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+        body {
+            background-color: #050510;
+            color: #E2E8F0;
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 80%);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .token-icon {
+            position: relative;
+            z-index: 1;
+        }
+
+        .token-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, currentColor 0%, transparent 70%);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .code-block {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3rem; }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
+<body class="antialiased">
 
-    <!-- Header -->
-    <header class="gradient-bg text-white py-16 px-4 text-center">
-        <h1 class="text-5xl font-extrabold mb-4">Melti Tokens</h1>
-        <p class="text-xl opacity-90">Building a vibrant community ecosystem on the Pi Testnet</p>
-        <div class="mt-8">
-            <code class="bg-black bg-opacity-30 px-4 py-2 rounded text-sm">Issuer: GAUIZK...EBOSV</code>
+    <div class="bg-mesh"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass-card px-8 py-3 bg-black/20">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-blue-500 flex items-center justify-center shadow-lg">
+                    <i class="fas fa-meteor text-white text-xl"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">MELTI</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#" class="hover:text-purple-400 transition-colors">Ecosystem</a>
+                <a href="#" class="hover:text-purple-400 transition-colors">Liquidity</a>
+                <a href="#" class="hover:text-purple-400 transition-colors">Docs</a>
+            </div>
+            <div>
+                <button class="bg-white/10 hover:bg-white/20 px-5 py-2 rounded-full text-sm font-semibold transition-all border border-white/10">
+                    Connect Pi Wallet
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-40 pb-20 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-400 text-xs font-bold uppercase tracking-widest mb-6 border border-purple-500/20">
+                Pi Network Testnet Ecosystem
+            </span>
+            <h1 class="hero-title text-6xl md:text-8xl font-extrabold mb-8 leading-tight tracking-tight">
+                Empower Your <br>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-blue-500">Digital Assets.</span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
+                Melti provides a professional liquidity layer and utility tokens designed specifically for the Pi Network community. Fast, secure, and decentralized.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <div class="glass-card px-6 py-4 flex items-center space-x-4 border-white/5 bg-white/5">
+                    <div class="text-left">
+                        <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Issuer Public Key</p>
+                        <p id="issuerAddress" class="text-sm font-mono text-purple-300">GAUIZK...EBOSV</p>
+                    </div>
+                    <button onclick="copyAddress()" class="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-all">
+                        <i id="copyIcon" class="far fa-copy text-sm text-gray-400"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto py-16 px-4">
-        
-        <h2 class="text-3xl font-bold text-center mb-12">Our Ecosystem Tokens</h2>
+    <!-- Token Grid -->
+    <main class="max-w-7xl mx-auto px-6 py-20">
+        <div class="flex items-end justify-between mb-16">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Core Assets</h2>
+                <p class="text-gray-500">Minted and verified on the Pi Testnet ledger.</p>
+            </div>
+        </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- PGOLD Card -->
-            <div class="token-card bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-                <div class="w-20 h-20 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
-                    <i class="fas fa-coins"></i>
+            <!-- PGOLD -->
+            <div class="glass-card p-10 flex flex-col justify-between h-full group">
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-yellow-500/10 text-yellow-500 flex items-center justify-center mb-8 token-icon text-3xl group-hover:animate-bounce">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">MeltiGold</h3>
+                    <div class="flex items-center space-x-2 mb-6 text-yellow-500/80 text-xs font-bold uppercase">
+                        <span class="px-2 py-0.5 rounded bg-yellow-500/10 border border-yellow-500/20">PGOLD</span>
+                        <span>Premium Reward Asset</span>
+                    </div>
+                    <p class="text-gray-400 mb-8 leading-relaxed font-light">
+                        The elite tier reward token. Stake PGOLD to unlock governance features and exclusive ecosystem benefits.
+                    </p>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">MeltiGold</h3>
-                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-bold mb-4">PGOLD</span>
-                <p class="text-gray-600 mb-6">The premium reward token for our community. Stake and earn exclusive benefits.</p>
-                <div class="text-left text-sm bg-gray-50 p-4 rounded-lg">
-                    <p class="mb-1 text-gray-500">Total Minted:</p>
-                    <p class="font-mono font-bold">100,000.00</p>
-                </div>
-            </div>
-
-            <!-- PEARN Card -->
-            <div class="token-card bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-2">MeltiEarn</h3>
-                <span class="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-bold mb-4">PEARN</span>
-                <p class="text-gray-600 mb-6">Earn PEARN by participating in community activities and supporting growth.</p>
-                <div class="text-left text-sm bg-gray-50 p-4 rounded-lg">
-                    <p class="mb-1 text-gray-500">Total Minted:</p>
-                    <p class="font-mono font-bold">100,000.00</p>
+                <div class="code-block p-5 rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[10px] text-gray-500 uppercase font-black">Circulating Supply</span>
+                        <span class="text-[10px] text-green-500 font-bold">● VERIFIED</span>
+                    </div>
+                    <p class="text-xl font-bold text-white tracking-wider">200,000.00</p>
                 </div>
             </div>
 
-            <!-- PCASH Card -->
-            <div class="token-card bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-                <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
-                    <i class="fas fa-wallet"></i>
+            <!-- PEARN -->
+            <div class="glass-card p-10 flex flex-col justify-between h-full group">
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-green-500/10 text-green-500 flex items-center justify-center mb-8 token-icon text-3xl group-hover:animate-float">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">MeltiEarn</h3>
+                    <div class="flex items-center space-x-2 mb-6 text-green-500/80 text-xs font-bold uppercase">
+                        <span class="px-2 py-0.5 rounded bg-green-500/10 border border-green-500/20">PEARN</span>
+                        <span>Ecosystem Power</span>
+                    </div>
+                    <p class="text-gray-400 mb-8 leading-relaxed font-light">
+                        Earned through activity. PEARN fuels the underlying ecosystem growth and community-led initiatives.
+                    </p>
                 </div>
-                <h3 class="text-2xl font-bold mb-2">MeltiCash</h3>
-                <span class="inline-block bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-bold mb-4">PCASH</span>
-                <p class="text-gray-600 mb-6">Daily utility token for fast, secure peer-to-peer transactions.</p>
-                <div class="text-left text-sm bg-gray-50 p-4 rounded-lg">
-                    <p class="mb-1 text-gray-500">Total Minted:</p>
-                    <p class="font-mono font-bold">100,000.00</p>
+                <div class="code-block p-5 rounded-2xl text-center relative overflow-hidden">
+                    <div class="shimmer absolute inset-0"></div>
+                    <div class="relative z-10 text-left">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] text-gray-500 uppercase font-black">Circulating Supply</span>
+                            <span class="text-[10px] text-green-500 font-bold">● VERIFIED</span>
+                        </div>
+                        <p class="text-xl font-bold text-white tracking-wider">200,000.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PCASH -->
+            <div class="glass-card p-10 flex flex-col justify-between h-full group border-blue-500/20">
+                <div>
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center mb-8 token-icon text-3xl group-hover:animate-pulse">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">MeltiCash</h3>
+                    <div class="flex items-center space-x-2 mb-6 text-blue-500/80 text-xs font-bold uppercase">
+                        <span class="px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">PCASH</span>
+                        <span>Utility & Velocity</span>
+                    </div>
+                    <p class="text-gray-400 mb-8 leading-relaxed font-light">
+                        The medium of exchange. Designed for high-frequency micro-transactions within the Pi Browse application.
+                    </p>
+                </div>
+                <div class="code-block p-5 rounded-2xl">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[10px] text-gray-500 uppercase font-black">Circulating Supply</span>
+                        <span class="text-[10px] text-green-500 font-bold">● VERIFIED</span>
+                    </div>
+                    <p class="text-xl font-bold text-white tracking-wider">200,000.00</p>
                 </div>
             </div>
 
         </div>
-
-        <!-- How to Get Section -->
-        <section class="mt-24 bg-gray-100 rounded-3xl p-12">
-            <h2 class="text-3xl font-bold mb-8 text-center">How to Join</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h4 class="text-xl font-bold mb-4"><i class="fas fa-check-circle text-purple-600 mr-2"></i> 1. Create a Trustline</h4>
-                    <p class="text-gray-600 mb-6">Add our tokens to your Pi Wallet using the Asset Codes (PGOLD, PEARN, PCASH) and the Issuer Address shown above.</p>
-                    
-                    <h4 class="text-xl font-bold mb-4"><i class="fas fa-check-circle text-purple-600 mr-2"></i> 2. Swap on Pi DEX</h4>
-                    <p class="text-gray-600">You can get our tokens by swapping Test-Pi in the Liquidity Pools section of your Pi Wallet.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                    <h4 class="font-bold mb-4 text-purple-600">Verified Metadata</h4>
-                    <p class="text-sm text-gray-500 mb-2">This project is linked to:</p>
-                    <p class="font-mono text-sm break-all mb-4">ayubtn.github.io</p>
-                    <a href="/.well-known/pi.toml" class="text-purple-600 hover:underline text-sm font-bold">View pi.toml File</a>
-                </div>
-            </div>
-        </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="py-12 text-center text-gray-500 border-t border-gray-200">
-        <p>&copy; 2024 Melti Tokens Ecosystem. All rights reserved.</p>
-        <p class="text-sm mt-2">Built for the Pi Testnet Community</p>
+    <footer class="py-20 border-t border-white/5 text-center px-6 mt-20">
+        <div class="max-w-4xl mx-auto">
+            <div class="flex justify-center space-x-8 mb-12">
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-500 hover:text-white transition-colors text-xl"><i class="fab fa-telegram"></i></a>
+            </div>
+            <p class="text-gray-400 mb-4 font-medium">&copy; 2026 Melti Tokens Ecosystem.</p>
+            <p class="text-xs text-gray-600 uppercase tracking-[0.2em] font-bold">Designed for the Future of Decentralized Economy</p>
+        </div>
     </footer>
 
+    <script>
+        const FULL_ADDRESS = "GAUIZK25ARVPCWCT3R44HEU23TSFKMFTF4WNSXMQWKKX4LOJFRWEBOSV";
+
+        function copyAddress() {
+            navigator.clipboard.writeText(FULL_ADDRESS).then(() => {
+                const icon = document.getElementById('copyIcon');
+                const text = document.getElementById('issuerAddress');
+                
+                icon.className = 'fas fa-check text-green-400';
+                text.innerText = "COPIED!";
+                text.classList.add('text-green-400');
+
+                setTimeout(() => {
+                    icon.className = 'far fa-copy text-gray-400';
+                    text.innerText = "GAUIZK...EBOSV";
+                    text.classList.remove('text-green-400');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
